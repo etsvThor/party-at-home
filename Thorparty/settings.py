@@ -25,7 +25,7 @@ SECRET_KEY = 'vedskh5%ok=)r##wm8sm+s2^$+r(5u*jy&w^a34vo__*i101o&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.2']
+ALLOWED_HOSTS = ['192.168.1.2','party-at-home.thor.edu'] 
 
 
 # Application definition
