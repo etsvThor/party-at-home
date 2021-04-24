@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from Thorparty.settings import USE_HTTPS
+from django.conf import settings
 
 # Create your views here.
 # chat/views.py
@@ -7,7 +7,7 @@ from Thorparty.settings import USE_HTTPS
 def index(request):
     return render(request, 'chat/index.html')
 def room(request, room_name):
-    if USE_HTTPS:
+    if settings.USE_HTTPS:
         ws_protocol = "wss"
     else:
         ws_protocol = "ws"

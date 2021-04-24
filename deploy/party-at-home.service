@@ -7,7 +7,7 @@ After=nginx.service
 [Service]
 User=composer
 Group=www-data
-Environment=USE_HTTPS=1
+Environment="DJANGO_SETTINGS_MODULE=Thorparty.settings_prod"
  
 ReadWriteDirectories=/var/www/web-party-at-home /var/log/gunicorn
 WorkingDirectory=/var/www/web-party-at-home

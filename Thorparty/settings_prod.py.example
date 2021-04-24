@@ -1,0 +1,7 @@
+from .settings import *
+
+# overwrite settings for production
+
+DEBUG = False
+SECRET_KEY = 'GENERATE_OWN_KEY'
+USE_HTTPS = True
