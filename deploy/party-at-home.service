@@ -1,0 +1,34 @@
+[Unit]
+Description=Party at home
+After=network.service
+After=nginx.service
+# After=gunicorn3.service
+ 
+[Service]
+User=composer
+Group=www-data
+Environment=USE_HTTPS=1
+ 
+ReadWriteDirectories=/var/www/web-party-at-home /var/log/gunicorn
+WorkingDirectory=/var/www/web-party-at-home
+Environment="PATH=/var/www/web-party-at-home/thorparty/bin:$PATH"
+Environment="VIRTUAL_ENV=/var/www/web-party-at-home/thorparty"
+ 
+PrivateUsers=true
+ProtectSystem=full
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+ 
+# ExecStart=/var/www/web-party-at-home/thorparty/bin/gunicorn -b unix:/var/www/web-party-at-home/Thorparty.sock -m 007 Thorparty.wsgi --workers 4 --error-logfile /var/log/gunicorn/error.log --log-level debug
+ExecStart=/var/www/web-party-at-home/thorparty/bin/daphne -u /var/www/web-party-at-home/Thorparty.sock Thorparty.asgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+ 
+Restart=always
+RestartSec=3s
+ 
+[Install]
+WantedBy=multi-user.target
+
