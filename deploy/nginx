@@ -1,0 +1,46 @@
+upstream app_server {
+     server unix:/var/www/web-party-at-home/Thorparty.sock fail_timeout=0;
+}
+
+
+
+server {
+    listen 80 default; 
+    
+    root /var/www/web-party-at-home/public;
+    index index.php index.html;
+
+    server_name party-at-home.thor.edu;
+
+    set_real_ip_from 10.2.0.0/16;
+    real_ip_header X-Real-IP;
+    real_ip_recursive on;
+
+    
+    location / { 
+         proxy_pass http://app_server;
+         proxy_set_header Host $host;
+         proxy_set_header X-Forwarded-Host $server_name;
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header Upgrade $http_upgrade;
+         proxy_set_header Connection "Upgrade";
+
+    }   
+
+    location ~ /\.ht {
+        deny all;
+    }   
+
+    location ~ /\.git {
+        deny all;
+    }   
+
+    location ~ /\.env {
+        deny all;
+    }
+   
+    location  ~ (^|/)\. {
+        deny all;
+    }
+
+}
