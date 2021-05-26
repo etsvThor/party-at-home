@@ -10,6 +10,23 @@
     <input id="chat-message-input" type="text" size="100"><br>
     <input id="chat-message-submit" type="button" value="Send">
     {{ room_name|json_script:"room-name" }}
+
+
+    <p>
+    <h4>Commands:</h4>
+        <ul>
+            <li>red</li>
+            <li>blue</li>
+            <li>green</li>
+            <li>rainbow</li>
+            <li>pattern_off</li>
+            <li>next</li>
+            <li>auto</li>
+            <li>man</li>
+            <li>colorchord</li>
+            <li>colorchord_off</li>
+        </ul>
+    </p>
     <script>
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
